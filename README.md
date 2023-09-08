@@ -1,2 +1,2 @@
-# AppFilme
-Aplicativo de filmes utilizando api em ionic
+# appFilme
+app utilizando api

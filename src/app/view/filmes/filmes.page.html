@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Busca Filmes</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+ 
+  <ion-searchbar [(ngModel)]="termosBusca" (ionChange)="busca()"></ion-searchbar>
+ 
+  <ion-item>
+    <ion-label>Seleciona Tipo</ion-label>
+    <ion-select [(ngModel)]="tipo" (ionChange)="busca()">
+      <ion-select-option value="">Tudo</ion-select-option>
+      <ion-select-option value="movie">Filmes</ion-select-option>
+      <ion-select-option value="series">Séries</ion-select-option>
+      <ion-select-option value="episode">Episódios</ion-select-option>
+    </ion-select>
+  </ion-item>
+ 
+  <ion-list>
+ 
+    <ion-item button *ngFor="let item of (resultados | async)" [routerLink]="['/', 'detalhes', item.imdbID]">
+      <ion-avatar slot="start">
+        <img [src]="item.Poster" *ngIf="item.Poster != 'N/A'">
+      </ion-avatar>
+ 
+      <ion-label text-wrap>
+        <h3>{{ item.Title }}</h3>
+        {{ item.Year }}
+      </ion-label>
+ 
+      <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
+      <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
+      <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon>
+ 
+    </ion-item>
+ 
+  </ion-list>
+ 
+</ion-content>
+
